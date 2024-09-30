@@ -9,44 +9,15 @@ import {
 	FlatList,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import PokemonScreen from "./screens/PokemonScreen";
 
 export default function App() {
 	return (
 		<>
 			<StatusBar style="light" />
-			<View style={styles.container}>
-				<View style={styles.pokeTop}>
-					<Text style={styles.mainTitle}>What are you looking for?</Text>
-				</View>
-
-				<ScrollView>
-					<View style={[styles.pokesContainer]}>
-						<View style={[styles.optionButton, styles.option1]}>
-							<Pressable android_ripple={{ color: "#75C879" }}>
-								<Text style={styles.commonText}>Pokèmon</Text>
-							</Pressable>
-						</View>
-
-						<View style={[styles.optionButton, styles.option2]}>
-							<Pressable android_ripple={{ color: "#F88C81" }}>
-								<Text style={styles.commonText}>Items</Text>
-							</Pressable>
-						</View>
-
-						<View style={[styles.optionButton, styles.option3]}>
-							<Pressable android_ripple={{ color: "#71B7F7" }}>
-								<Text style={styles.commonText}>Moves</Text>
-							</Pressable>
-						</View>
-
-						<View style={[styles.optionButton, styles.option4]}>
-							<Pressable android_ripple={{ color: "#C37AD6" }}>
-								<Text style={styles.commonText}>Types</Text>
-							</Pressable>
-						</View>
-					</View>
-				</ScrollView>
-			</View>
+			
+				<PokemonScreen />
+	
 		</>
 	);
 }
@@ -55,7 +26,7 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#201d21",
 		flex: 1,
-		flexDirection: "column",
+
 		justifyContent: "center",
 		alignItems: "center",
 	},

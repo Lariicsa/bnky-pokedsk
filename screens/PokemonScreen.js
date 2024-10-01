@@ -4,11 +4,25 @@ import { FlatList } from "react-native";
 import ItemsGrid from "../components/ItemsGrid";
 import { CATEGORIES } from "../data/mock";
 
-function renderPokemonItem(itemData) {
-	return <ItemsGrid title={itemData.item.title} color={itemData.item.color} />;
-}
+function PokemonScreen({ navigation }) {
+	function renderPokemonItem(itemData) {
+		function pressHandler() {
+			navigation.navigate("DetailScreen", {
+				categoryId: itemData.item.id,
+				
+			});
+		}
 
-function PokemonScreen(item) {
+		return (
+			<ItemsGrid
+				title={itemData.item.title}
+				color={itemData.item.color}
+				onPress={pressHandler}
+				navigation={navigation}
+			/>
+		);
+	}
+
 	return (
 		<FlatList
 			data={CATEGORIES}

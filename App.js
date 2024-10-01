@@ -8,16 +8,24 @@ import {
 	Pressable,
 	FlatList,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import PokemonScreen from "./screens/PokemonScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DetailScreen from "./screens/DetailScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
 		<>
 			<StatusBar style="light" />
-			
-				<PokemonScreen />
-	
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen name="PokemonScreen" component={PokemonScreen} />
+					<Stack.Screen name="DetailScreen" component={DetailScreen} />
+				</Stack.Navigator>
+			</NavigationContainer>
 		</>
 	);
 }

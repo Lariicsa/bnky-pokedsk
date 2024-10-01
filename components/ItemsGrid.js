@@ -1,8 +1,10 @@
 /** @format */
 
 import { Pressable, View, Text, Platform, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ItemsGrid({ id, title, color, onPress }) {
+
 	return (
 		<View style={styles.gridItem}>
       <Pressable

@@ -1,102 +1,20 @@
-/** @format */
-
-import {
-	StyleSheet,
-	Text,
-	View,
-	ScrollView,
-	Pressable,
-	FlatList,
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import PokemonScreen from "./screens/PokemonScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DetailScreen from "./screens/DetailScreen";
-
-const Stack = createNativeStackNavigator();
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-	return (
-		<>
-			<StatusBar style="light" />
-			<NavigationContainer>
-				<Stack.Navigator>
-					<Stack.Screen name="PokemonScreen" component={PokemonScreen} />
-					<Stack.Screen name="DetailScreen" component={DetailScreen} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</>
-	);
+  return (
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#201d21",
-		flex: 1,
-
-		justifyContent: "center",
-		alignItems: "center",
-	},
-
-	pokeTop: {
-		paddingTop: 40,
-		paddingHorizontal: 16,
-		flex: 1,
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "start",
-	},
-
-	pokesContainer: {
-		paddingTop: 10,
-		flex: 2,
-		flexDirection: "row",
-		justifyContent: "space-around",
-		alignItems: "stretch",
-		flexWrap: "wrap",
-		marginHorizontal: "auto",
-		width: "90%",
-	},
-
-	mainTitle: {
-		marginTop: 32,
-		fontSize: 40,
-		fontWeight: "700",
-		color: "#ffffff",
-	},
-
-	optionButton: {
-		width: "100%",
-		height: 100,
-		marginBottom: 24,
-		borderRadius: 8,
-	},
-
-	option1: {
-		backgroundColor: "#5DBE62",
-	},
-	option2: {
-		backgroundColor: "#F7786B",
-	},
-	option3: {
-		backgroundColor: "#58AAF6",
-	},
-	option4: {
-		backgroundColor: "#B863CF",
-	},
-
-	commonText: {
-		fontSize: 26,
-		fontWeight: "700",
-		color: "#ffffff",
-		height: "100%",
-		width: "100%",
-		padding: 8,
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		textAlign: "center",
-		textAlignVertical: "center",
-	},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

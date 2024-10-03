@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AppHome from "./screens/AppHome";
 import PokemonTypes from "./screens/PokemonTypeScreen";
 import PokemonDetail from "./screens/PokemonDetailScreen";
+import PokemonList from "./screens/PokemonListScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ export default function App() {
 						name="AppHome"
 						component={AppHome}
 						options={{ title: "Home" }}></Stack.Screen>
+
+					<Stack.Screen
+						name="PokemonListScreen"
+						component={PokemonList}
+						options={{ title: "Pokemons" }}></Stack.Screen>
 					<Stack.Screen
 						name="PokemonTypeScreen"
 						component={PokemonTypes}

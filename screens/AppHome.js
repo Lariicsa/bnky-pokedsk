@@ -19,9 +19,14 @@ export default function AppHomeScreen({ navigation }) {
 				</View>
 			</Pressable>
 
-			<View style={[styles.menuOption, styles.option2]}>
-				<Text style={styles.textOption}>Moves</Text>
-			</View>
+			<Pressable
+				onPress={() => {
+					navigation.navigate("PokemonListScreen");
+				}}>
+				<View style={[styles.menuOption, styles.option2]}>
+					<Text style={styles.textOption}>Pokemons</Text>
+				</View>
+			</Pressable>
 
 			<View style={[styles.menuOption, styles.option3]}>
 				<Text style={styles.textOption}>Locations</Text>

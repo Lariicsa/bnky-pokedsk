@@ -5,7 +5,7 @@ import {
 	Text,
 	StyleSheet,
 	Platform,
-	ImageBackground,
+	Image,
 } from "react-native";
 
 function TypeGridTile({ title, onPress, image, id }) {
@@ -18,14 +18,8 @@ function TypeGridTile({ title, onPress, image, id }) {
 					pressed ? styles.buttonPressed : null,
 				]}
 				onPress={onPress}>
-				<View style={[styles.innerContainer]}>
-					<ImageBackground
-						source={image}
-						resizeMode="stretch"
-						style={styles.image}>
-						<Text style={styles.title}>{title}</Text>
-					</ImageBackground>
-				</View>
+				<Image source={image} style={styles.image}></Image>
+				<Text style={styles.title}>{title}</Text>
 			</Pressable>
 		</View>
 	);
@@ -35,16 +29,16 @@ export default TypeGridTile;
 
 const styles = StyleSheet.create({
 	gridItem: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "flex-end",
+		alignItems: "center",
 		flex: 1,
 		margin: 16,
-		height: 150,
-		borderRadius: 8,
-		elevation: 4,
-		backgroundColor: "white",
-		shadowColor: "black",
-		shadowOpacity: 0.25,
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 8,
+		height: 100,
+		width: 100,
+		elevation: 1,
+
 		overflow: Platform.OS === "android" ? "hidden" : "visible",
 	},
 	button: {
@@ -55,17 +49,23 @@ const styles = StyleSheet.create({
 	},
 	innerContainer: {
 		flex: 1,
-		padding: 16,
+		padding: 8,
 		borderRadius: 8,
 		justifyContent: "center",
 		alignItems: "center",
 	},
 	title: {
-		fontWeight: "bold",
+		fontWeight: "semibold",
 		fontSize: 18,
+		color: "#fff",
+		textTransform: "capitalize",
 	},
 	image: {
 		flex: 1,
 		justifyContent: "center",
+		alignItems: "center",
+		width: "auto",
+		height: 100,
+		resizeMode: "stretch",
 	},
 });

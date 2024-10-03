@@ -1,23 +1,41 @@
 /** @format */
-
-import { useLayoutEffect } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+	View,
+	Text,
+	Image,
+	StyleSheet,
+	ImageBackground,
+	FlatList,
+} from "react-native";
 import { useEffect, useState } from "react";
-import { fetchPokemonsByType} from '../utils/http'
+import { fetchPokemonsByType } from "../utils/http";
 
-import IconButton from "../components/IconButton";
-import AppList from "../components/MealDetail/List";
-import AppSubtitle from "../components/AppSubtitle";
+// import IconButton from "../components/IconButton";
+// import AppList from "../components/MealDetail/List";
+// import AppSubtitle from "../components/AppSubtitle";
 
 function PokemonDetailScreen({ route, navigation }) {
+	const [fetchedPokemonDetails, setPokemonDetails] = useState();
+	const pokeId = route.params.typeId;
 
-  const [fetchedTypeData, setTypeData]
+	useEffect(() => {
+		async function getPokemonsByType() {
+			const pokemons = await fetchPokemonsByType(pokeId);
+			// console.log(pokemons)
+			setPokemonDetails(pokemons);
+		}
+		getPokemonsByType();
+	}, []);
 
-  const typeId = route.params.typeId
-
-  
-
-
+	return (
+		<>
+			<FlatList
+				data={fetchedPokemonDetails}
+				keyExtractor={(item) => item.name}
+				numColumns={2}
+			/>
+		</>
+	);
 }
 
 export default PokemonDetailScreen;

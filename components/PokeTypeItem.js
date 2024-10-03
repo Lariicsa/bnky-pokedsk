@@ -1,8 +1,14 @@
 /** @format */
+import {
+	Pressable,
+	View,
+	Text,
+	StyleSheet,
+	Platform,
+	ImageBackground,
+} from "react-native";
 
-import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
-
-function TypeGridTile({ title, onPress }) {
+function TypeGridTile({ title, onPress, image, id }) {
 	return (
 		<View style={styles.gridItem}>
 			<Pressable
@@ -13,7 +19,12 @@ function TypeGridTile({ title, onPress }) {
 				]}
 				onPress={onPress}>
 				<View style={[styles.innerContainer]}>
-					<Text style={styles.title}>{title}</Text>
+					<ImageBackground
+						source={image}
+						resizeMode="stretch"
+						style={styles.image}>
+						<Text style={styles.title}>{title}</Text>
+					</ImageBackground>
 				</View>
 			</Pressable>
 		</View>
@@ -52,5 +63,9 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: "bold",
 		fontSize: 18,
+	},
+	image: {
+		flex: 1,
+		justifyContent: "center",
 	},
 });

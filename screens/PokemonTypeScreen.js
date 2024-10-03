@@ -7,27 +7,28 @@ import PokeTypeItem from "../components/PokeTypeItem";
 
 export default function PokemonTypesScreen({ navigation }) {
 	const [fetchedTypesData, setTypesData] = useState();
+	const ulrBase = "../assets/pokeicons/";
 
 	useEffect(() => {
 		async function getPokeTypes() {
-			const pokemons = await fetchPokeTypes();
-			setTypesData(pokemons);
+			const types = await fetchPokeTypes();
+			setTypesData(types);
 		}
-
 		getPokeTypes();
 	}, []);
 
 	function renderPokeTypeItem(itemData) {
 		function pressHandler() {
-			navigation.navigate("", {
-				typeId: itemData.item.id,
+			navigation.navigate("PokemonDetailScreen", {
+				typeId: itemData.index,
 			});
 		}
 
 		return (
 			<PokeTypeItem
 				title={itemData.item.name}
-				id={itemData.item.id}
+				id={itemData.index}
+				image={`${ulrBase}${itemData.item.name}.png`}
 				onPress={pressHandler}
 			/>
 		);

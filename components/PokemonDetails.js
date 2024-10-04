@@ -13,7 +13,7 @@ function PokemonDetail({ title, onPress, image, id }) {
 		<View style={styles.gridItem}>
 
 				<Image source={image} style={styles.image}></Image>
-				<Text style={styles.title}>HERE SOME {title}</Text>
+
 	
 		</View>
 	);

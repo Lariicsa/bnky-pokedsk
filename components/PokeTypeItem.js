@@ -8,7 +8,7 @@ import {
 	Image,
 } from "react-native";
 
-function TypeGridTile({ title, onPress, image, id }) {
+function PokeTypeItem({ title, onPress, image, id }) {
 	return (
 		<View style={styles.gridItem}>
 			<Pressable
@@ -18,14 +18,14 @@ function TypeGridTile({ title, onPress, image, id }) {
 					pressed ? styles.buttonPressed : null,
 				]}
 				onPress={onPress}>
-				<Image source={image} style={styles.image}></Image>
+				<Image source={image} style={styles.image} />
 				<Text style={styles.title}>{title}</Text>
 			</Pressable>
 		</View>
 	);
 }
 
-export default TypeGridTile;
+export default PokeTypeItem;
 
 const styles = StyleSheet.create({
 	gridItem: {

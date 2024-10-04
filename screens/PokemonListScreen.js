@@ -19,7 +19,7 @@ export default function PokemonListScreen({ navigation }) {
 	function renderPokemonItem(itemData) {
 		function pressHandler() {
 			navigation.navigate("PokemonDetailScreen", {
-				typeId: itemData.index,
+				typeId: itemData.index + 1,
 			});
 		}
 
@@ -28,7 +28,9 @@ export default function PokemonListScreen({ navigation }) {
 				title={itemData.item.name}
 				id={itemData.index}
 				image={{
-					uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${itemData.index}.png`,
+					uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${
+						itemData.index + 1
+					}.png`,
 				}}
 				onPress={pressHandler}
 			/>

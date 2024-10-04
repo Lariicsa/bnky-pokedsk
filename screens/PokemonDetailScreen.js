@@ -8,37 +8,32 @@ import {
 	FlatList,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { fetchPokemonsByType } from "../utils/http";
+import { fetchPokemonDetail } from "../utils/http";
+import PokemonDetails from "../components/PokemonDetails";
 
-// import IconButton from "../components/IconButton";
-// import AppList from "../components/MealDetail/List";
-// import AppSubtitle from "../components/AppSubtitle";
-
-function PokemonDetailScreen({ route, navigation }) {
-	const [fetchedPokemonDetails, setPokemonDetails] = useState();
+export default function PokemonDetailScreen({ route, navigation }) {
 	const pokeId = route.params.typeId;
+	const [fetchedPokemonDetails, setPokemonDetails] = useState();
+	
 
 	useEffect(() => {
-		async function getPokemonsByType() {
-			const pokemons = await fetchPokemonsByType(pokeId);
-			// console.log(pokemons)
+		
+		async function getPokemonDetail() {
+			const pokemons = await fetchPokemonDetail(pokeId);
+			console.log("pokeId", pokemons.name);
 			setPokemonDetails(pokemons);
 		}
-		getPokemonsByType();
+		getPokemonDetail();
 	}, []);
+
 
 	return (
 		<>
-			<FlatList
-				data={fetchedPokemonDetails}
-				keyExtractor={(item) => item.name}
-				numColumns={2}
-			/>
+			<Text>Some</Text>
+			{/* <PokemonDetails title={pokemons.name} /> */}
 		</>
 	);
 }
-
-export default PokemonDetailScreen;
 
 const styles = StyleSheet.create({
 	rootContainer: {

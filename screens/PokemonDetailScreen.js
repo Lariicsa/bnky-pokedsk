@@ -28,7 +28,7 @@ export default function PokemonDetailScreen({ route, navigation }) {
 		</View>
 	);
 
-	const Abilities = ({ title }) => (
+	const StatItem = ({ title }) => (
 		<Text style={styles.abilityText}>· {title}</Text>
 	);
 
@@ -64,9 +64,24 @@ export default function PokemonDetailScreen({ route, navigation }) {
 							<FlatList
 								data={fetchedDetail.abilities}
 								renderItem={({ item }) => (
-									<Abilities title={item.ability.name} />
+									<StatItem title={item.ability.name} />
 								)}
 								keyExtractor={(item) => item.slot}
+								numColumns={2}
+							/>
+						</View>
+
+
+
+						<View style={[styles.section, ]}>
+							<Text style={styles.sectionText}>Moves:</Text>
+
+							<FlatList
+								data={fetchedDetail.moves}
+								renderItem={({ item }) => (
+									<StatItem title={item.move.name} />
+								)}
+								keyExtractor={(item) => item.move.name}
 								numColumns={2}
 							/>
 						</View>
@@ -160,6 +175,8 @@ const styles = StyleSheet.create({
 	section: {
 		display: "flex",
 		flexDirection: "column",
+		marginVertical: 16
+		
 	},
 
 	sectionText: {

@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
 	},
 
 	image: {
+
 		display: "flex",
 		width: 250,
 		height: 250,
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
 	},
 	typeText: {
 		display: "flex",
-		color: "#111",
+		color: "#fff",
 		fontSize: 11,
 		textTransform: "uppercase",
 	},

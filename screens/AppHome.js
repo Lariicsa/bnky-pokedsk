@@ -12,15 +12,6 @@ export default function AppHomeScreen({ navigation }) {
 
 			<Pressable
 				onPress={() => {
-					navigation.navigate("PokemonTypeScreen");
-				}}>
-				<View style={[styles.menuOption, styles.option1]}>
-					<Text style={styles.textOption}>Types</Text>
-				</View>
-			</Pressable>
-
-			<Pressable
-				onPress={() => {
 					navigation.navigate("PokemonListScreen");
 				}}>
 				<View style={[styles.menuOption, styles.option2]}>
@@ -28,9 +19,14 @@ export default function AppHomeScreen({ navigation }) {
 				</View>
 			</Pressable>
 
-			<View style={[styles.menuOption, styles.option3]}>
-				<Text style={styles.textOption}>Locations</Text>
-			</View>
+			<Pressable
+				onPress={() => {
+					navigation.navigate("PokemonWhosThat");
+				}}>
+				<View style={[styles.menuOption, styles.option3]}>
+					<Text style={styles.textOption}>Who's that Pokémon?</Text>
+				</View>
+			</Pressable>
 		</View>
 	);
 }

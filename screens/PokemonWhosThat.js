@@ -1,103 +1,100 @@
 /** @format */
-import {
-	View,
-	Text,
-	Image,
-	StyleSheet,
-	ImageBackground,
-	FlatList,
-} from "react-native";
+import { View, Text, Image, StyleSheet, Button, Pressable } from "react-native";
 import { useEffect, useState } from "react";
 import { fetchPokemonDetail } from "../utils/http";
+import AnswerInput from "../components/WhosThatInput";
 
 export default function PokemonWhosThat({ route, navigation }) {
-	const [fetchedDetail, setPokemonDetails] = useState();
+	const [inputValue, setInputValue] = useState("");
+	const [currentId, setNewId] = useState();
+	const [pokeName, setPokeName] = useState();
+	const [currentColor, setColor] = useState("hidden");
 
 	useEffect(() => {
-		async function getPokemonDetail() {}
-		getPokemonDetail();
-	}, []);
+		if (inputValue == "") {
+			getRandomId();
+		}
+	}, [pokeName]);
 
-	const RGBAColor = (type) => {
-		const POKEMON_TYPE = {
-			fire: "251,156,84",
-			fighting: "205, 64, 105",
-			grass: "99, 187, 91",
-			psychic: "249, 113, 118",
-			poison: "171, 106, 200",
-			dragon: "39, 109, 196",
-			ghost: "82, 105, 172",
-			dark: "90, 83, 102",
-			ground: "217, 119, 69",
-			fairy: "236, 143, 230",
-			water: "77, 144, 213",
-			flying: "143, 168, 221",
-			normal: "144, 152, 161",
-			rock: "199, 183, 139",
-			electric: "243, 210, 59",
-			bug: "144, 193, 43",
-			ice: "116, 206, 192",
-			steel: "90, 142, 160",
-		};
-		const BG_COLOR = POKEMON_TYPE[type] ?? false;
-		return BG_COLOR;
-	};
+	function checkAnswerValue() {
+		if (pokeName === inputValue) {
+			setColor("unhide");
+      setInputValue("")
+		}
+		console.log("currentColor", currentColor);
 
-	const HEXColor = (type) => {
-		const POKEMON_TYPE = {
-			fire: "#fb9c54",
-			fighting: "#CD4069",
-			grass: "#63bb5b",
-			psychic: "#f97176",
-			poison: "#ab6ac8",
-			dragon: "#276dc4",
-			ghost: "#5269ac",
-			dark: "#5a5366",
-			ground: "#d97745",
-			fairy: "#ec8fe6",
-			water: "#4d90d5",
-			flying: "#8fa8dd",
-			normal: "#9098a1",
-			rock: "#c7b78b",
-			electric: "#f3d23b",
-			bug: "#90c12b",
-			ice: "#74cec0",
-			steel: "#5a8ea0",
-		};
-		const BG_COLOR = POKEMON_TYPE[type] ?? false;
-		return BG_COLOR;
-	};
+	}
 
-	const Tag = ({ title, bg }) => (
-		<View style={[styles.type, { backgroundColor: bg }]}>
-			<Text style={styles.typeText}>{title}</Text>
-		</View>
-	);
+	async function getRandomId() {
+		const newId = Math.floor(Math.random() * 20) + 1;
+		setNewId(newId);
+		const { name } = await fetchPokemonDetail(newId);
+		setPokeName(name);
 
-	const StatItem = ({ title }) => (
-		<Text style={styles.abilityText}>· {title}</Text>
-	);
+		console.log("pokeName", pokeName);
+
+		return newId;
+	}
 
 	return (
 		<View style={styles.outerContainer}>
-			<ImageBackground style={styles.box}>
-				<Image
-					source={{
-						uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${5}.png`,
-					}}
-					style={styles.image}
-				/>
-			</ImageBackground>
+			<Text style={styles.title}>Who's this Pokémon? </Text>
+			<Image
+				source={{
+					uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${currentId}.png`,
+				}}
+				style={[styles.image, styles.hidden]}
+			/>
+
+			<AnswerInput
+				label="Type your Answer"
+				textInputConfig={{
+					onChangeText: (newText) => setInputValue(newText),
+					value: inputValue,
+				}}
+			/>
+
+			<Pressable style={styles.button} onPress={checkAnswerValue}>
+				<Text style={styles.buttonText}>Check</Text>
+			</Pressable>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	outerContainer: {
+		backgroundColor: "#fb370d",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		paddingTop: 100,
+		paddingHorizontal: 40,
+		width: "100%",
+		height: "100%",
+	},
+
+	title: {
+		fontSize: 56,
+		fontWeight: "bold",
+		color: "#fff",
+	},
+
+	button: {
+		backgroundColor: "#fbb002",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		width: "100%",
+		height: 44,
+		padding: 8,
+		borderRadius: 8,
+		textAlign: "center",
+		marginTop: 16,
+	},
+
+	buttonText: {
+		fontSize: 24,
+		fontWeight: "bold",
+		color: "#000",
 	},
 
 	image: {
@@ -106,5 +103,27 @@ const styles = StyleSheet.create({
 		height: 250,
 		resizeMode: "contain",
 		marginHorizontal: "auto",
+		marginBottom: 40,
 	},
+
+	box: {
+		width: "100%",
+		height: "100%",
+		resizeMode: "contain",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		flex: 1,
+		padding: 16,
+		marginHorizontal: "auto",
+		marginVertical: "auto",
+	},
+
+  hidden: {
+    tintColor: '#000'
+  },
+  unhide:{
+    tintColor: '#fff'
+  }
+
 });

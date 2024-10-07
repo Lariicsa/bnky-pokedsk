@@ -14,10 +14,10 @@ export default function PokemonListScreen({ navigation }) {
 	useEffect(() => {
 		async function getPokemons() {
 			const response = await fetchPokemons(currentPage);
-			const { results, counts } = response;
-			setPokemons(results);
-			setTotalPages(counts);
-			setPokemonsData(response);
+			const { data } = response;
+			setPokemons(data.results);
+			setTotalPages(data.counts);
+			setPokemonsData(pokemons);
 		}
 		getPokemons();
 	}, [currentPage]);
@@ -27,10 +27,9 @@ export default function PokemonListScreen({ navigation }) {
 	};
 
 	function renderPokemonItem(itemData) {
-
 		function pressHandler() {
 			navigation.navigate("PokemonDetailScreen", {
-				typeId: itemData.index + 1,
+				typeId: itemData.index + 1 + currentPage,
 			});
 		}
 
@@ -59,7 +58,6 @@ export default function PokemonListScreen({ navigation }) {
 				onEndReachedThreshold={0.1}
 				numColumns={2}
 			/>
-
 		</>
 	);
 }

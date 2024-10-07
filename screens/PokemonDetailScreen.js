@@ -16,9 +16,9 @@ export default function PokemonDetailScreen({ route, navigation }) {
 
 	useEffect(() => {
 		async function getPokemonDetail() {
-			const pokemons = await fetchPokemonDetail(pokeId);
+			const {data}= await fetchPokemonDetail(pokeId);
 
-			setPokemonDetails(pokemons);
+			setPokemonDetails(data);
 		}
 		getPokemonDetail();
 	}, []);

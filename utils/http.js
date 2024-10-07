@@ -7,13 +7,14 @@ const API_URL = "https://pokeapi.co/api/v2/";
 export async function fetchPokemons(offset) {
 	const response = await axios.get(`${API_URL}pokemon?offset=${offset}&limit=20`);
   const types = response.data.results
-  console.log(offset)
+  console.log('offset', offset)
   return types
 }
 
 export async function fetchPokemonDetail(id) {
 	const response = await axios.get(`${API_URL}pokemon/${id}`);
-  const types = response.data
+  console.log('http', response.data.id)
+  const types = response
 
   return types
 }

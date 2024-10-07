@@ -19,7 +19,7 @@ function PokeTypeItem({ title, onPress, image, id }) {
 				]}
 				onPress={onPress}>
 				<Image source={image} style={styles.image} />
-				<Text style={styles.title}>{title}</Text>
+				<Text style={styles.title}>{title}-{id}</Text>
 			</Pressable>
 		</View>
 	);

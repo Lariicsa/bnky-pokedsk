@@ -29,6 +29,9 @@ export default function PokemonListScreen({ navigation }) {
 	function renderPokemonItem(itemData) {
 
 		function pressHandler() {
+			console.log('currentPage', currentPage)
+			console.log('itemData.index', itemData.index)
+			console.log('id', itemData.item)
 			navigation.navigate("PokemonDetailScreen", {
 				typeId: itemData.index + 1,
 			});
@@ -53,10 +56,10 @@ export default function PokemonListScreen({ navigation }) {
 			<FlatList
 				data={fetchedPokemonsData}
 				keyExtractor={(item) => item.name}
-				showsVerticalScrollIndicator={false}
+				showsVerticalScrollIndicator={true}
 				renderItem={renderPokemonItem}
 				onEndReached={loadMorePokemons}
-				onEndReachedThreshold={0.5}
+				onEndReachedThreshold={0.1}
 				numColumns={2}
 			/>
 

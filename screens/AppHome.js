@@ -7,7 +7,7 @@ export default function AppHomeScreen({ navigation }) {
 		<View style={styles.container}>
 			<Text style={[styles.text, styles.title]}>Welcome!</Text>
 			<Text style={[styles.text, styles.subtitle]}>
-				What info would you like to know?
+				What would you like do?
 			</Text>
 
 			<Pressable

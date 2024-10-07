@@ -11,10 +11,8 @@ import {
 function PokemonDetail({ title, onPress, image, id }) {
 	return (
 		<View style={styles.gridItem}>
-
 				<Image source={image} style={styles.image}></Image>
 
-	
 		</View>
 	);
 }

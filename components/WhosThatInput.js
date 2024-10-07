@@ -2,7 +2,7 @@
 
 import { TextInput, View, StyleSheet, Text, Button } from "react-native";
 
-export default function AnswerInput({ label, textInputConfig }) {
+export default function AnswerInput({ textInputConfig }) {
 	return (
 		<View style={styles.wrapper}>
 			<TextInput

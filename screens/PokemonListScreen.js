@@ -29,9 +29,6 @@ export default function PokemonListScreen({ navigation }) {
 	function renderPokemonItem(itemData) {
 
 		function pressHandler() {
-			console.log('currentPage', currentPage)
-			console.log('itemData.index', itemData.index)
-			console.log('id', itemData.item)
 			navigation.navigate("PokemonDetailScreen", {
 				typeId: itemData.index + 1,
 			});

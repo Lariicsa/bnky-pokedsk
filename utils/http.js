@@ -13,7 +13,6 @@ export async function fetchPokemons(offset) {
 
 export async function fetchPokemonDetail(id) {
 	const response = await axios.get(`${API_URL}pokemon/${id}`);
-  console.log('http', response.data.id)
   const types = response
 
   return types

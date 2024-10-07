@@ -8,31 +8,32 @@ export default function PokemonWhosThat({ route, navigation }) {
 	const [inputValue, setInputValue] = useState("");
 	const [currentId, setNewId] = useState();
 	const [pokeName, setPokeName] = useState();
-	const [currentColor, setColor] = useState("hidden");
+	const [currentColor, setColor] = useState(true);
 
 	useEffect(() => {
-		if (inputValue == "") {
+		if (inputValue === "") {
 			getRandomId();
 		}
 	}, [pokeName]);
 
 	function checkAnswerValue() {
-		if (pokeName === inputValue) {
-			setColor("unhide");
-      setInputValue("")
+		if (inputValue !== "") {
+			if (pokeName === inputValue) {
+				setColor(false);
+			} else {
+				setColor(true);
+			}
 		}
-		console.log("currentColor", currentColor);
-
 	}
 
 	async function getRandomId() {
-		const newId = Math.floor(Math.random() * 20) + 1;
+		setColor(true);
+		setInputValue("");
+		const newId = Math.floor(Math.random() * 30) + 1;
 		setNewId(newId);
-		const { name } = await fetchPokemonDetail(newId);
-		setPokeName(name);
-
-		console.log("pokeName", pokeName);
-
+		const { data } = await fetchPokemonDetail(newId);
+		setPokeName(data.name);
+		console.log("pokeName", data.name);
 		return newId;
 	}
 
@@ -43,7 +44,7 @@ export default function PokemonWhosThat({ route, navigation }) {
 				source={{
 					uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${currentId}.png`,
 				}}
-				style={[styles.image, styles.hidden]}
+				style={[styles.image, [currentColor ? styles.hidden : ""]]}
 			/>
 
 			<AnswerInput
@@ -54,16 +55,22 @@ export default function PokemonWhosThat({ route, navigation }) {
 				}}
 			/>
 
-			<Pressable style={styles.button} onPress={checkAnswerValue}>
-				<Text style={styles.buttonText}>Check</Text>
-			</Pressable>
+			{currentColor ? (
+				<Pressable style={styles.button} onPress={checkAnswerValue}>
+					<Text style={styles.buttonText}>Check</Text>
+				</Pressable>
+			) : (
+				<Pressable style={styles.button} onPress={getRandomId}>
+					<Text style={styles.buttonText}>Play again</Text>
+				</Pressable>
+			)}
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	outerContainer: {
-		backgroundColor: "#fb370d",
+		backgroundColor: "#F3D23B",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
@@ -75,11 +82,11 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 56,
 		fontWeight: "bold",
-		color: "#fff",
+		color: "#276DC4",
 	},
 
 	button: {
-		backgroundColor: "#fbb002",
+		backgroundColor: "#CD4069",
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
@@ -92,9 +99,9 @@ const styles = StyleSheet.create({
 	},
 
 	buttonText: {
-		fontSize: 24,
+		fontSize: 22,
 		fontWeight: "bold",
-		color: "#000",
+		color: "#fff",
 	},
 
 	image: {
@@ -119,11 +126,7 @@ const styles = StyleSheet.create({
 		marginVertical: "auto",
 	},
 
-  hidden: {
-    tintColor: '#000'
-  },
-  unhide:{
-    tintColor: '#fff'
-  }
-
+	hidden: {
+		tintColor: "#000",
+	},
 });

@@ -18,6 +18,8 @@ export default function PokemonListScreen({ navigation }) {
 			setPokemons(results);
 			setTotalPages(counts);
 			setPokemonsData(response);
+			//funciona mejor con paginación
+			console.log('currentPage', currentPage)
 		}
 		getPokemons();
 	}, [currentPage]);
@@ -53,7 +55,7 @@ export default function PokemonListScreen({ navigation }) {
 			<FlatList
 				data={fetchedPokemonsData}
 				keyExtractor={(item) => item.name}
-				showsVerticalScrollIndicator={false}
+				showsVerticalScrollIndicator={true}
 				renderItem={renderPokemonItem}
 				onEndReached={loadMorePokemons}
 				onEndReachedThreshold={0.5}

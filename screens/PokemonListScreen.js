@@ -18,7 +18,7 @@ export default function PokemonListScreen({ navigation }) {
 			setPokemons(results);
 			setTotalPages(counts);
 			setPokemonsData(response);
-			//funciona mejor con paginación
+			//funciona mejor con paginación check flatlist how to know up and down
 			console.log('currentPage', currentPage)
 		}
 		getPokemons();

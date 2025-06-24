@@ -1,35 +1,39 @@
 /** @format */
 
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	FlatList,
+	Button,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { fetchPokemons } from "../utils/http";
 import PokeTypeItem from "../components/PokeTypeItem";
 
 export default function PokemonListScreen({ navigation }) {
-	const [fetchedPokemonsData, setPokemonsData] = useState();
+	const [fetchedPokemonsData, setFetchedPokemonsData] =
+		useState([]);
+	const [offset, setOffset] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [currentPage, setCurrentPage] = useState(0);
-	const [totalPages, setTotalPages] = useState(0);
-	const [pokemons, setPokemons] = useState([]);
 
 	useEffect(() => {
-		async function getPokemons() {
-			const response = await fetchPokemons(currentPage);
-			const { results, counts } = response;
-			setPokemons(results);
-			setTotalPages(counts);
-			setPokemonsData(response);
-			//funciona mejor con paginación check flatlist how to know up and down
-			console.log('currentPage', currentPage)
-		}
-		getPokemons();
-	}, [currentPage]);
+		loadMorePokemons();
+	}, []);
 
-	const loadMorePokemons = () => {
-		setCurrentPage(currentPage + 20);
+	const loadMorePokemons = async () => {
+		if (isLoading) return; // Evita llamadas múltiples
+
+		setIsLoading(true);
+		const newPokemons = await fetchPokemons(offset);
+		setFetchedPokemonsData((prev) => [...prev, ...newPokemons]);
+		setOffset((prev) => prev + 20); // Incrementa para la siguiente página
+		setIsLoading(false);
 	};
 
 	function renderPokemonItem(itemData) {
-
 		function pressHandler() {
 			navigation.navigate("PokemonDetailScreen", {
 				typeId: itemData.index + 1,
@@ -61,7 +65,6 @@ export default function PokemonListScreen({ navigation }) {
 				onEndReachedThreshold={0.5}
 				numColumns={2}
 			/>
-
 		</>
 	);
 }
